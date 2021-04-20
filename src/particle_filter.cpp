@@ -40,7 +40,7 @@ void ParticleFilter::init(double x, double y, double theta, double std[]) {
     Particle p{i, dist_x(gen), dist_y(gen), dist_theta(gen), 1};
     particles.push_back(p);
     weights.push_back(1);
-    //std::cout << "Init, particle #" << i << ", coords: " << p.x << "," << p.y << ", theta: " << p.theta << std::endl;
+    //std::cout << "      particle id: " << p.id << ", coords: " << p.x << "," << p.y << ", theta: " << p.theta << std::endl;
   }
   is_initialized = true;
 }
@@ -56,15 +56,13 @@ void ParticleFilter::prediction(double delta_t, double std_pos[],
    */
   //std::cout << "Prediction, delta_t: " << delta_t << ", velocity: " << velocity << ", yaw_rate: " << yaw_rate << std::endl;
   std::default_random_engine gen;
-  for (int i = 0; i < num_particles; ++i) {
-    
-    Particle& p = particles[i];
+  for (auto& p: particles) {
     
     double new_x;
     double new_y;
     double new_theta;
     
-    //std::cout << " Particle #" << i << ", coords: " << p.x << "," << p.y << ", theta: " << p.theta << std::endl;
+    //std::cout << " particle id: " << p.id << ", coords: " << p.x << "," << p.y << ", theta: " << p.theta << std::endl;
     
     if (yaw_rate == 0) {
       new_x = p.x + velocity*delta_t*cos(p.theta);
@@ -85,7 +83,7 @@ void ParticleFilter::prediction(double delta_t, double std_pos[],
     p.y = dist_y(gen);
     p.theta = dist_theta(gen);
 
-    //std::cout << "          #" << i << ", coords: " << p.x << "," << p.y << ", theta: " << p.theta << std::endl;
+    //std::cout << "          id: " << p.id << ", coords: " << p.x << "," << p.y << ", theta: " << p.theta << std::endl;
   }
 }
 
