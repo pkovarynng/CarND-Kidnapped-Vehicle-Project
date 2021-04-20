@@ -248,6 +248,7 @@ inline bool read_landmark_data(std::string filename,
   return true;
 }
 
+// The  Multivariate-Gaussian probability density function from class
 inline double multiv_prob(double sig_x, double sig_y, double x_obs, double y_obs,
                    double mu_x, double mu_y) {
   // calculate normalization term
